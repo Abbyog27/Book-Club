@@ -7,9 +7,9 @@ Review the Project 2 requirements and check out some [examples](https://romebell
 In this space below, list **THREE** ideas for your Project 2. For each idea, include [user stories](https://www.atlassian.com/agile/project-management/user-stories) for each idea and a link to the API(s) you want to use for it.
 
 --------------------------------------------------------
-1. 
-2. 
-3.
+1. Book Search 
+2. Quote of the Day
+3. Dog picture of the Day
 ---------------------------------------------------------
 
 Make a PR when you're done!
@@ -28,6 +28,14 @@ In the space below:
 
 ----------------------------------------------------------
 ### User Stories
+User will be able to search for books by title, author, genre, ISBN.
+1. 	User will be able to create an account.
+2. 	User will be able to log into created account. 
+3. 	User will have a search bar to enter search by title, author, genre, ISBN. As the app will be connected to the NY Times books API, the found book will be displayed on the page itself.
+4. 	User will be able to click on the book, to display details of the book.
+5. 	User will be able to add favorite books into favorite section.
+6. 	User will be able to log out of the app.
+7. Will be using NY Times API - https://developer.nytimes.com/
 
 ----------------------------------------------------------
 ### Wireframes

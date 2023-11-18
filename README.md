@@ -23,6 +23,16 @@ Express authentication template using Passport + Flash messages + custom middlew
 | createdAt | Date | Auto-generated |
 | updatedAt | Date | Auto-generated |
 
+### Favorites Model
+
+| Column Name | Data Type | Notes |
+| --------------- | ------------- | ------------------------------ |
+| id | Integer | Serial Primary Key, Auto-generated |
+| book_id | integer| assigned to book once it is rendered by search |
+| user_id | integer | assigned to user once they sign up |
+| createdAt | Date | Auto-generated |
+| updatedAt | Date | Auto-generated |
+
 ### Default Routes
 
 | Method | Path | Location | Purpose |
