@@ -35,6 +35,17 @@ Express authentication template using Passport + Flash messages + custom middlew
 | GET | /auth/logout | auth.js | Removes session info |
 | GET | /profile | server.js | Regular User Profile |
 
+
+### Book Search Routes
+
+| Method | Path | Location | Purpose |
+| ------ | ---------------- | -------------- | ------------------- |
+| GET | / | server.js | Home page to display all books by any filter user inputs |
+| GET | /book/{id} | book.js | render book selection |
+| POST | /book/fav | book.js | Add book to favorite|
+| DELETE | /book/fav | book.js | Delete book from favorite|
+| PUT | /user | auth.js | Update user information |
+
 ## `1` Fork & Clone Project & Install Dependencies
 `1` The first thing that we are going to do is `fork` and `clone`
 
