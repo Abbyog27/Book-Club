@@ -25,7 +25,9 @@ In the space below:
 
 ----------------------------------------------------------
 ### ERD
+![Alt text](<Screen Shot 2023-11-18 at 4.48.56 PM.png>)
 
+![Alt text](<Screen Shot 2023-11-18 at 4.50.08 PM.png>)
 ----------------------------------------------------------
 ### User Stories
 User will be able to search for books by title, author, genre, ISBN.
