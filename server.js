@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const bookRoutes = require('./controllers/books');
 const layouts = require('express-ejs-layouts');
 const app = express();
 const session = require('express-session');
@@ -43,6 +44,7 @@ app.get('/', (req, res) => {
 app.use('/auth', require('./controllers/auth'));
 
 // Add this below /auth controllers
+app.use('books', bookRoutes);
 app.get('/profile', isLoggedIn, (req, res) => {
   const { id, name, email } = req.user.get(); 
   res.render('profile', { id, name, email });
