@@ -44,7 +44,8 @@ app.get('/', (req, res) => {
 app.use('/auth', require('./controllers/auth'));
 
 // Add this below /auth controllers
-app.use('books', bookRoutes);
+app.use('/books', require('./controllers/books'));
+
 app.get('/profile', isLoggedIn, (req, res) => {
   const { id, name, email } = req.user.get(); 
   res.render('profile', { id, name, email });
