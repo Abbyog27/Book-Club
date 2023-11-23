@@ -18,7 +18,10 @@ router.get('/', async (req, res) => {
     console.log(response);
     const data = response.data;
     //render data from api in home page
-    res.render('index', { data: data });
+    console.log(data);
+    console.log("**************");
+    console.log(data.docs[0]);
+    res.render('index.ejs', { data: data.docs });
   } catch (error) {
     console.error('Error making API call:', error);
     res.status(500).json({ error: 'Internal Server Error' });
