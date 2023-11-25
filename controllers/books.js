@@ -5,24 +5,29 @@ const axios = require('axios');
 //get all books
 router.get('/', async (req, res) => {
   try {
-    //set default params
-    let searchInput = "*";
-    let pageNumber = 1;
-    if (req.query.searchInput !== undefined && req.query.pageNumber !== undefined) {
-      searchInput = req.query.searchInput;c
-      pageNumber = req.query.pageNumber;
-    }
-    const searchParams = "q=" + searchInput + "&page=" + pageNumber;
+    const input = req.query.input || "*";
+    const currentPage = req.query.page || 1;
+    const pageSize = 100;
+    const searchParams = "q=" + input + "&page=" + currentPage;
     console.log(searchParams);
     const response = await axios.get('https://openlibrary.org/search.json?' + searchParams);
-    console.log(response);
     const data = response.data;
-    //render data from api in home page
-    console.log(data);
-    console.log("**************");
-    console.log(data.docs[0]);
-    res.render('index.ejs', { data: data.docs });
-  } catch (error) {
+    console.log('data: ', data);
+    const books = [];
+    for(const book of data.docs) {
+      books.push({
+        title: book.title,
+        author_name: (!book.author_name || book.author_name.length === 0) ? "N/A" :  book.author_name[0],
+        publish_year : (!book.publish_year || book.publish_year.length === 0) ? "N/A" :  book.publish_year[0]
+      });
+    }   
+    console.log('books: ', books);
+    res.render('index', {
+      cards: books,
+      currentPage: parseInt(currentPage),
+      totalPages: Math.ceil(data.numFound / pageSize),
+    });
+    } catch (error) {
     console.error('Error making API call:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
