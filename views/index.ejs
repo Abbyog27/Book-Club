@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EJS Search Page</title>
+  <title>Search Page</title>
   <!-- Add any additional CSS or stylesheets here -->
   <style>
     .card {
       border: 1px solid #ccc;
       padding: 10px;
       margin: 10px;
-      width: 200px;
-      height: 300px; /* Fixed height for the card */
+      width: 400px;
+      height: 300px;
       display: inline-block;
-      overflow: hidden; /* Hide overflow content */
+      overflow: hidden;
     }
 
     .card h3 {
@@ -23,50 +24,59 @@
     .card p {
       margin: 0;
       overflow: hidden;
-      text-overflow: ellipsis; /* Show ellipsis for overflow text */
-      white-space: nowrap; /* Prevent wrapping */
+      text-overflow: ellipsis;
+      /* Show ellipsis for overflow text */
+      white-space: nowrap;
+      /* Prevent wrapping */
     }
   </style>
 </head>
+
 <body>
-
-  <div>
-    <!-- Search bar in the top middle -->
-    <input type="text" placeholder="Search" style="text-align: center; width: 100%; margin: 10px 0;">
-  </div>
-
-  <div>
-    <!-- Grid of cards -->
-    <% cards.forEach(card => { %>
-      <div class="card">
-        <h3><%= card.title %></h3>
-        <p>Author: <%= card.author_name   %></p>
-        <p>Publish Year: <%= card.publish_year %></p>
-        <!-- Add more fields as needed -->
-      </div>
-    <% }); %>
-  </div>
-
-  <div>
-    <!-- Pagination -->
-    <% if (currentPage > 1) { %>
-      <a href="?page=1">First</a>
-      <a href="?page=<%= currentPage - 1 %>">Previous</a>
-    <% } %>
-
-    Page <%= currentPage %> of <%= totalPages %>
-
-    <% if (currentPage < totalPages) { %>
-      <a href="?page=<%= currentPage + 1 %>">Next</a>
-      <a href="?page=<%= totalPages %>">Last</a>
-    <% } %>
-  </div>
-
   <div style="float: right; margin: 10px;">
-    <!-- Icons linking to profile page and logout -->
     <a href="/profile"><img src="/profile-icon.png" alt="Profile"></a>
     <a href="/logout"><img src="/logout-icon.png" alt="Logout"></a>
   </div>
+  <div>
+    <input type="text" id="searchInput" placeholder="Search for a book" value="<%= input === '*'? '' : input %>"
+      style="text-align: center; width: 50%; margin: 10px 0;">
+    <button onclick="search(<%= currentPage %>)">Search</button>
+  </div>
+  <div>
+    <% cards.forEach(card=> { %>
+      <div class="card">
+        <h3>
+          <%= card.title %>
+        </h3>
+        <p>Author: <%= card.author_name %>
+        </p>
+        <p>Publish Year: <%= card.publish_year %>
+        </p>
+      </div>
+      <% }); %>
+  </div>
 
+  <div>
+    <% if (currentPage> 1) { %>
+      <button onclick="search(<%= currentPage - 1  %>)">Previous</button>
+      <% } %>
+
+        Page <%= currentPage %> of <%= totalPages %>
+
+            <% if (currentPage < totalPages) { %>
+              <button onclick="search(<%= currentPage + 1  %>)">Next</button>
+              <% } %>
+  </div>
+  </div>
+  <script>
+    function search(pageNumber) {
+      console.log('pageNumber: ', pageNumber);
+      const searchElement = document.getElementById('searchInput');
+      const searchInput = searchElement.value.trim();
+      const searchUrl = `/books/search?input=${searchInput}&page=${pageNumber}`;
+      console.log('url: ', searchUrl);
+      window.location.href = searchUrl;
+    }
+  </script>
 </body>
 </html>

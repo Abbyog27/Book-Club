@@ -3,7 +3,7 @@ const router = express.Router();
 const axios = require('axios');
 
 //get all books
-router.get('/', async (req, res) => {
+router.get('/search', async (req, res) => {
   try {
     const input = req.query.input || "*";
     const currentPage = req.query.page || 1;
@@ -24,6 +24,7 @@ router.get('/', async (req, res) => {
     console.log('books: ', books);
     res.render('index', {
       cards: books,
+      input, input,
       currentPage: parseInt(currentPage),
       totalPages: Math.ceil(data.numFound / pageSize),
     });
