@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const { favorite } = require('../models');
+const isLoggedIn = require('../middleware/isLoggedIn');
 
 //get all books
 router.get('/search', async (req, res) => {
@@ -42,7 +44,7 @@ router.get('/:id', async (req, res) => {
     
     let author = {
       personal_name : "N/A",
-      bio : {value : "N/A"}
+      bio : {value : "N/A "}
     }
     if(bookDetails.authors && bookDetails.authors.length > 0) {
       const authorResponse = await axios.get(`https://openlibrary.org/${bookDetails.authors[0].key}.json`)
@@ -63,9 +65,20 @@ router.get('/:id', async (req, res) => {
 }
 });
 
-//adding book to favorite
-router.put('/favorite', (req, res) => {
+router.post('/favorite', isLoggedIn, async(req, res) => {
+  const { isbn } = req.body;
+  console.log('body: ', req.body);
+  const { id } = req.user.get(); 
+  console.log('id: ', id);
+  const createdFav = await favorite.findOrCreate({
+    where: { userId: id, isbn: isbn },
+    defaults: {
+        isbn: isbn,
+        userId: id
+    },
+});
 
-})
-
+res.status(200).json({ message: 'favorite inserted'});
+});
+  
 module.exports = router;
