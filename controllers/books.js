@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     let searchInput = "*";
     let pageNumber = 1;
     if (req.query.searchInput !== undefined && req.query.pageNumber !== undefined) {
-      searchInput = req.query.searchInput;
+      searchInput = req.query.searchInput;c
       pageNumber = req.query.pageNumber;
     }
     const searchParams = "q=" + searchInput + "&page=" + pageNumber;
@@ -29,9 +29,23 @@ router.get('/', async (req, res) => {
 });
 
 //getting book by id
-router.get('/:id', (req, res) => {
-  res.send('book with specific id', req.params.id);
-})
+router.get('/:id', async (req, res) => {
+  try {
+    const id  = req.query.id;
+    const response = await axios.get('https://openlibrary.org/search.json?' + id);
+    console.log(response);
+    const data = response.data;
+    console.log(data.id_goodreads);
+    for (let i = 0; i < data.length; i++) {
+      let book =  data[i];
+      if (book.id === req.query.searchInput) {
+  }
+  res.render('book-details.ejs', {id : id});
+}} catch (error) {
+  console.error('Error making API call:', error);
+  res.status(500).json({ error: 'Internal Server Error' });
+}
+});
 
 //adding book to favorite
 router.put('/favorite', (req, res) => {

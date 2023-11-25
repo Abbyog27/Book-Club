@@ -1,24 +1,37 @@
-<h2>Homepage</h2>
-<nav class="navbar bg-body-tertiary">
-  <div class="container-fluid">
-    <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search by title, author, isbn" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
-  </div>
-  <div>
-    <div class="book-card" style="width: 18rem;">
-      <% for( let i=0; i < data.length; i++ ) { %>
-        <% let book=data[i]; %>  
-      <div class="card-body">
-        <h5 class="card-title"><%= book.title %></h5>
-        <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-        <p class="card-text"> </p>
-        <a href="#" class="card-link">Card link</a>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <nav class="navbar bg-body-tertiary">
+    <div class="container">
+      <form action="search" method="POST">
+        <input type="text" name="book" value="" placeholder="Book title or Author">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+    <div>
+      <div class="card-columns">
+        <div class="book-card" style="width: 18rem;">
+          <% for( let i=0; i < data.length; i++ ) { %>
+            <% let book=data[i]; %>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <%= book.title %>
+                </h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                <p class="card-text"> </p>
+                <a href="#" class="card-link">View book details</a>
+  
+              </div>
+              <% } %>
+        </div>
       </div>
-      <% } %>
     </div>
-    </div>
-</nav>
-
+  </nav>
+  <link rel="stylesheet" href="style.css">
+</body>
+</html>
