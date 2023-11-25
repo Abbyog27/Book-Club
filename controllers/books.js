@@ -9,19 +9,17 @@ router.get('/search', async (req, res) => {
     const currentPage = req.query.page || 1;
     const pageSize = 100;
     const searchParams = "q=" + input + "&page=" + currentPage;
-    console.log(searchParams);
     const response = await axios.get('https://openlibrary.org/search.json?' + searchParams);
     const data = response.data;
-    console.log('data: ', data);
     const books = [];
     for(const book of data.docs) {
       books.push({
         title: book.title,
         author_name: (!book.author_name || book.author_name.length === 0) ? "N/A" :  book.author_name[0],
-        publish_year : (!book.publish_year || book.publish_year.length === 0) ? "N/A" :  book.publish_year[0]
+        publish_year : (!book.publish_year || book.publish_year.length === 0) ? "N/A" :  book.publish_year[0],
+        isbn: (!book.isbn || book.isbn.length === 0) ? "N/A" :  book.isbn[0]
       });
     }   
-    console.log('books: ', books);
     res.render('index', {
       cards: books,
       input, input,
@@ -37,17 +35,29 @@ router.get('/search', async (req, res) => {
 //getting book by id
 router.get('/:id', async (req, res) => {
   try {
-    const id  = req.query.id;
-    const response = await axios.get('https://openlibrary.org/search.json?' + id);
-    console.log(response);
-    const data = response.data;
-    console.log(data.id_goodreads);
-    for (let i = 0; i < data.length; i++) {
-      let book =  data[i];
-      if (book.id === req.query.searchInput) {
-  }
-  res.render('book-details.ejs', {id : id});
-}} catch (error) {
+    const id  = req.params.id;
+
+    const bookDetailsResponse = await axios.get(`https://openlibrary.org/isbn/${id}.json`);
+    const bookDetails = bookDetailsResponse.data;
+    
+    let author = {
+      personal_name : "N/A",
+      bio : {value : "N/A"}
+    }
+    if(bookDetails.authors && bookDetails.authors.length > 0) {
+      const authorResponse = await axios.get(`https://openlibrary.org/${bookDetails.authors[0].key}.json`)
+      author = authorResponse.data;  
+    }
+  
+    res.render('book-details.ejs', {
+    isbn: id,
+    title: bookDetails.title,
+    publishers: bookDetails.publishers,
+    publishDate: bookDetails.publish_date,
+    author: author.personal_name,
+    bio: !author.bio ? "N/A" : author.bio.value
+  });
+} catch (error) {
   console.error('Error making API call:', error);
   res.status(500).json({ error: 'Internal Server Error' });
 }
