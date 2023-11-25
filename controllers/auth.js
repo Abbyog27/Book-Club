@@ -19,7 +19,7 @@ router.get('/logout', (req, res) => {
       return next(err);
     }
     req.flash('success', 'Logging out... See you next time!');
-    res.redirect('/');
+    res.redirect('/auth/login');
   }); // logs the user out of the session
 });
 
