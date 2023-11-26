@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const axios = require('axios');
 const bookRoutes = require('./controllers/books');
 const layouts = require('express-ejs-layouts');
 const app = express();
@@ -7,6 +8,8 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('./config/ppConfig');
 const isLoggedIn = require('./middleware/isLoggedIn');
+const { favorite } = require('./models');
+
 
 // environment variables
 SECRET_SESSION = process.env.SECRET_SESSION;
@@ -46,9 +49,28 @@ app.use('/auth', require('./controllers/auth'));
 // Add this below /auth controllers
 app.use('/books', require('./controllers/books'));
 
-app.get('/profile', isLoggedIn, (req, res) => {
-  const { id, name, email } = req.user.get(); 
-  res.render('profile', { id, name, email });
+app.get('/profile', isLoggedIn, async (req, res) => {
+  const { id, name, email } = req.user.get();
+  const favoriteIsbn = await favorite.findAll({
+    where: { userId: id },
+    attributes: ['isbn']
+  });
+  console.log(favoriteIsbn);
+  const userBooks = [];
+  for(let i = 0; i < favoriteIsbn.length; i++) {
+    const isbn = favoriteIsbn[i];
+    if (isbn && isbn.dataValues && isbn.dataValues.isbn) {
+    console.log(isbn.dataValues.isbn);
+    const bookDetailsResponse = await axios.get(`https://openlibrary.org/isbn/${isbn.dataValues.isbn}.json`);
+    const bookDetails = bookDetailsResponse.data;
+    title = bookDetails.title;
+    userBooks.push(title);
+
+    }
+    
+  }
+  console.log(userBooks);
+  res.render('profile', { id, name, email,userBooks });
 });
 
 const PORT = process.env.PORT || 3000;
