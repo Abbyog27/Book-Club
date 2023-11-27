@@ -42,13 +42,13 @@
     <!-- Display Book Cover Image -->
     <img src="https://covers.openlibrary.org/b/isbn/<%= isbn %>-L.jpg" alt="Book Cover" class="img-fluid">
 
-    <button id="favoriteButton" class="btn btn-danger mt-3" onclick="markAsFavorite('<%= 2 %>', '<%= isbn %>')">
+    <button id="favoriteButton" class="btn btn-danger mt-3" onclick="markAsFavorite('<%= isbn %>')">
       <span class="bi bi-heart"></span> Add to Favorites
     </button>
       </div>
 
   <script>
-    function markAsFavorite(userId, isbn) {
+    function markAsFavorite(isbn) {
       fetch('/books/favorite', {
         method: 'POST',
         headers: {

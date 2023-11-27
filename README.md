@@ -50,9 +50,9 @@ Express authentication template using Passport + Flash messages + custom middlew
 
 | Method | Path | Location | Purpose |
 | ------ | ---------------- | -------------- | ------------------- |
-| GET | / | server.js | Home page to display all books by any filter user inputs |
-| GET | /book/{id} | books.js | render book selection |
-| POST | /book/fav | books.js | Add book to favorite|
+| GET | /search | serverbooks.js | Home page to display all books by any filter user inputs |
+| GET | /books/:id | books.js | render book selection |
+| POST | /books/favorite | books.js | Add book to favorite|
 | DELETE | /book/fav | books.js | Delete book from favorite|
 | PUT | /user | auth.js | Update user information |
 
