@@ -57,21 +57,23 @@ app.get('/profile', isLoggedIn, async (req, res) => {
   });
   console.log(favoriteIsbn);
   const userBooks = [];
-  for(let i = 0; i < favoriteIsbn.length; i++) {
+  for (let i = 0; i < favoriteIsbn.length; i++) {
     const isbn = favoriteIsbn[i];
     if (isbn && isbn.dataValues && isbn.dataValues.isbn) {
-    console.log(isbn.dataValues.isbn);
-    const bookDetailsResponse = await axios.get(`https://openlibrary.org/isbn/${isbn.dataValues.isbn}.json`);
-    const bookDetails = bookDetailsResponse.data;
-    title = bookDetails.title;
-    userBooks.push(title);
-
+      console.log(isbn.dataValues.isbn);
+      const bookDetailsResponse = await axios.get(`https://openlibrary.org/isbn/${isbn.dataValues.isbn}.json`);
+      const bookDetails = bookDetailsResponse.data;
+      const title = bookDetails.title;
+      userBooks.push({title : title, isbn : isbn.dataValues.isbn});
     }
-    
   }
   console.log(userBooks);
-  res.render('profile', { id, name, email,userBooks });
+  res.render('profile', { id, name, email, userBooks });
 });
+
+
+
+
 
 const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () => {

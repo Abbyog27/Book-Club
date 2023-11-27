@@ -80,7 +80,25 @@ router.post('/favorite', isLoggedIn, async (req, res) => {
   res.status(200).json({ message: 'Book added to favorites' });
 });
 
-
+router.get('/favorite/:isbn/delete', isLoggedIn, async (req, res) => {
+  const { isbn } = req.params;
+  const { id } = req.user.get();
+  try {
+    const deletedBook = await favorite.destroy({
+      where: {
+        isbn: isbn,
+        userId : id
+      },
+    });
+    if (deletedBook === 0) {
+      return res.status(404).json({ message: 'Cannot find book in favorites' });
+    }
+    return res.redirect('/profile');
+  } catch (error) {
+    console.error('Error deleting book from favorites:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 
 module.exports = router;

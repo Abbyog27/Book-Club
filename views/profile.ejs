@@ -112,19 +112,16 @@
                     <div class="card-body">
                       <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2"></i>My Favorites</h6>
                       <% for( let i=0; i < userBooks.length; i++ ) { %>
-                        <% let title = userBooks[i]; %>
+                        <% let title = userBooks[i].title; %>
                        
                             <h><%= title %></h>
-                        
+                            <a href="/books/favorite/<%= userBooks[i].isbn %>/delete" class="btn btn-danger">Delete</a>
                             <% } %>
+                            
                     </div>
                   </div>
                 </div>
-                
-
-
             </div>
           </div>
-
         </div>
     </div>
