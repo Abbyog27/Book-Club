@@ -38,7 +38,6 @@ router.get('/search', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const id = req.params.id;
-
     const bookDetailsResponse = await axios.get(`https://openlibrary.org/isbn/${id}.json`);
     const bookDetails = bookDetailsResponse.data;
 
@@ -80,6 +79,7 @@ router.post('/favorite', isLoggedIn, async (req, res) => {
   res.status(200).json({ message: 'Book added to favorites' });
 });
 
+//Deleting book from favorites
 router.delete('/favorite', isLoggedIn, async (req, res) => {
   const { isbn } = req.body;
   const { id } = req.user.get();

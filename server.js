@@ -71,6 +71,30 @@ app.get('/profile', isLoggedIn, async (req, res) => {
   res.render('profile', { id, name, email, userBooks });
 });
 
+//Update user's email
+// app.put('/:id/email', async (req, res) => {
+//   const { id } = req.params;
+//   const { email } = req.body;
+
+//   try {
+//     const user = await user.findByPk(id);
+
+//     if (!user) {
+//       return res.status(404).json({ message: 'Cannot find user' });
+//     }
+
+//     // Update the user's email
+//     user.email = email;
+//     await user.save();
+
+//     res.status(200).json({ message: 'Email updated successfully', user });
+//   } catch (error) {
+//     console.error('Error updating email:', error);
+//     res.status(500).json({ message: 'Internal server error' });
+//   }
+// });
+
+
 
 
 
