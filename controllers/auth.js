@@ -43,7 +43,7 @@ router.post('/signup', async (req, res) => {
         // if created, success and we will redirect back to / page
         console.log(`----- ${_user.name} was created -----`);
         const successObject = {
-            successRedirect: '/',
+            successRedirect: '/auth/login',
             successFlash: `Welcome ${_user.name}. Account was created and logging in...`
         }
         // 
@@ -62,6 +62,22 @@ router.post('/signup', async (req, res) => {
   }
 });
 
+
+//Updated Users email
+router.put('/user/update', async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await user.findOne({email})
+    if (!user) return res.status(403).json({
+      error: 'Could not find user'
+    })
+    user.email = email
+      await user.save()
+      res.status(200).json({ message: 'Email has been updated' });
+    } catch (error) {
+      res.status(500).json({ error: 'Error' });
+  }
+});
 
 
 module.exports = router;
