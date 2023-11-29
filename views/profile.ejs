@@ -93,13 +93,10 @@
               <hr>
               <div class="row">
                 <div class="col-sm-12">
-                  <button id="edit" class="btn btn-primary" onclick="editUser('<%= {email} %>')">
+                  <a id="edit" class="btn btn-primary" href="/auth/<%= id %>/edit">
                     <span class="bi bi-heart"></span> Edit
-                  </button>
-                  <div>
-                    <input type="text" id="emailInput" placeholder="Enter new email">
-                    <button class="btn btn-primary" onclick="updateEmail()">Save Changes</button>
-                    <div id="emailContainer">
+                  </a>
+
                     </div>
                   </div>
                   </form>

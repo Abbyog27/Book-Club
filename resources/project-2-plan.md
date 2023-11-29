@@ -55,17 +55,17 @@ Make a PR when you're done!
 ```
 ### FUNDAMENTALS
 - [ ] Deployed (e.g. Heroku)
-- [ ] Site has basic functionality related to its goal
-- [ ] At least 2 GET routes (other than auth)
-- [ ] At least 1 POST route
-- [ ] At least 1 DELETE route
+- [X] Site has basic functionality related to its goal
+- [X] At least 2 GET routes (other than auth)
+- [X] At least 1 POST route
+- [X] At least 1 DELETE route
 - [ ] At least 1 PUT route
 ```
 
 `card` SUFFICIENT DIFFICULTY
 ```
 ### SUFFICIENT DIFFICULTY: At least 1 of the following: 
-- [ ] Use of an API
+- [X] Use of an API
 - [ ] Advanced Database Relationships
 - [ ] Sockets
 - [ ] Scraping
@@ -98,8 +98,8 @@ Make a PR when you're done!
 `card` DATABASE USAGE
 ```
 ### DATABASE USAGE
-- [ ] At least 2 Models other than join tables (required)
-- [ ] Relationships were set up appropriately between models
+- [X] At least 2 Models other than join tables (required)
+- [X] Relationships were set up appropriately between models
 - [ ] Avoided global variables, storing data in files, etc
 - [ ] No raw file/image data stored in database, etc
 ```

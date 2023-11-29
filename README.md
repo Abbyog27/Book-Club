@@ -50,11 +50,11 @@ Express authentication template using Passport + Flash messages + custom middlew
 
 | Method | Path | Location | Purpose |
 | ------ | ---------------- | -------------- | ------------------- |
-| GET | /search | serverbooks.js | Home page to display all books by any filter user inputs |
+| GET | books/search | books.js | Home page to display all books by any filter user inputs |
 | GET | /books/:id | books.js | render book selection |
-| POST | /books/favorite | books.js | Add book to favorite|
-| DELETE | /book/fav | books.js | Delete book from favorite|
-| PUT | /user | auth.js | Update user information |
+| POST | /books/favorite | books.js | Add book to favorite section|
+| DELETE | /book/favorite | books.js | Delete book from favorite section|
+| PUT | /user/update | auth.js | Update user email |
 
 ## `1` Fork & Clone Project & Install Dependencies
 `1` The first thing that we are going to do is `fork` and `clone`
@@ -119,8 +119,11 @@ sequelize db:create
 │   └── config.json
 ├── controllers
 │   └── auth.js
+|   └── books.js
 ├── models
+|   └── favorite.js
 │   └── index.js
+|   └── user.js
 ├── node_modules
 │   └── ...
 ├── public
@@ -136,6 +139,7 @@ sequelize db:create
 │   └── auth
 │       └── login.ejs
 │       └── signup.ejs
+|   └── book-details.ejs
 │   └── index.ejs
 │   └── layout.ejs
 │   └── profile.ejs
