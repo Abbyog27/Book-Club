@@ -37,7 +37,7 @@ User will be able to search for books by title, author, genre, ISBN.
 4. 	User will be able to click on the book, to display details of the book.
 5. 	User will be able to add favorite books into favorite section.
 6. 	User will be able to log out of the app.
-7. Will be using NY Times API - https://developer.nytimes.com/
+7. Will be using Open Library API - https://openlibrary.org/developers/api
 
 ----------------------------------------------------------
 ### Wireframes
