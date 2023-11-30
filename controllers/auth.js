@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('../config/ppConfig');
 const db = require('../models')
+const methodOverride = require('method-override');
 
 // import models
 const { user } = require('../models');
@@ -64,28 +65,14 @@ router.post('/signup', async (req, res) => {
 });
 
 
-//Updated Users email
-// router.put('/user/update', async (req, res) => {
-//   const { email } = req.body;
-//   try {
-//     const user = await user.findOne({email})
-//     if (!user) return res.status(403).json({
-//       error: 'Could not find user'
-//     })
-//     user.email = email
-//       await user.save()
-//       res.status(200).json({ message: 'Email has been updated' });
-//     } catch (error) {
-//       res.status(500).json({ error: 'Error' });
-//   }
-// });
+
 
 router.get('/:id/edit', (req, res) => {
   db.user.findOne({
     where: { id: req.params.id }
   })
     .then(user => {
-      return res.render('auth/edit-profile.ejs', { user: user});
+      return res.render('auth/edit-profile.ejs', { user:user});
     })
     .catch(error => {
       if (error) {
@@ -96,23 +83,23 @@ router.get('/:id/edit', (req, res) => {
     });
 });
 
-// router.put("/:id", async(req, res) => {
-//       const {userId} = req.params;
-//       const { email } = req.body;
-//       try {
-//         const updatedUser = await user.findByIdAndUpdate(userId, {email: newEmail})
-//         if (!updatedUser) {
-//           return res.status(404).json({ message: 'User not found' });
-//         }
-    
-//         res.status(200).json({ message: 'Email has been updated', user: updatedUser });
-//       } catch (error) {
-//         console.error('Error updating email:', error);
-//         res.status(500).json({ error: 'Internal server error' });
-//       }
-//     });
-
-
-
-
+//Updated Users email
+router.put('/:email', async (req, res) => {
+  
+  try {
+    const { email } = req.params;
+  const { id } = user.get()
+    const user = await db.user.findOne({ where: {id: id} });
+    if (!user) {
+      return res.status(404).json({
+      error: 'Could not find user'
+    });
+  }
+    user.email = email
+      await user.save()
+      res.status(200).json({ message: 'Email has been updated', user });
+    } catch (error) {
+      res.status(500).json({ error: 'Error' });
+  }
+});
 module.exports = router;

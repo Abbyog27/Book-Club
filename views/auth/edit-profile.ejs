@@ -8,13 +8,13 @@
 
   
 <main class="form-signin">
-<form action="/user/update<%= user.email%>/?_method=PUT" method="POST">
+<form action="/auth/<%= user.email %>/?_method=PUT" method="POST">
   <input type="text" id="email" placeholder="email" value="">
   <h1 class="h3 mb-3 fw-normal">Edit Email <%= user.email%></h1>
 
 
   <button class="btn btn-primary" type="submit">Update</button>
-  <a href="/user/update<%= user.email %>" class="btn btn-danger">Cancel Update</a>
+  <a href="/auth/profile" class="btn btn-danger">Cancel Update</a>
   <p class="mt-5 mb-3 text-muted">&copy; 2023</p>
 </form>
 </main>
