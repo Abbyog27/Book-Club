@@ -50,11 +50,13 @@ Express authentication template using Passport + Flash messages + custom middlew
 
 | Method | Path | Location | Purpose |
 | ------ | ---------------- | -------------- | ------------------- |
-| GET | books/search | books.js | Home page to display all books by any filter user inputs |
-| GET | /books/:id | books.js | render book selection |
-| POST | /books/favorite | books.js | Add book to favorite section|
-| DELETE | /book/favorite | books.js | Delete book from favorite section|
-| PUT | /user/update | auth.js | Update user email |
+| GET | books/search | books.js | Home page to display all books available through Open Library API and display books by search |
+| GET | books/:id | books.js | render book selection |
+| POST | books/favorite | books.js | Add book to favorite section in profile|
+| DELETE | books/favorite | books.js | Delete book from favorite section|
+| GET | auth:id/edit | auth.js |
+select user by id to update email 
+| PUT | auth/:email | auth.js | Update user email |
 
 ## `1` Fork & Clone Project & Install Dependencies
 `1` The first thing that we are going to do is `fork` and `clone`
@@ -162,3 +164,7 @@ sequelize db:create
 - `package.json`: The settings file that stores scripts and list of dependencies that are used inside your app.
 - `README.md`: The main markdown file that written to explain the details your app.
 - `server.js`: The main file that controls the entire application.
+
+## Views
+![Alt text](<Screen Shot 2023-11-29 at 7.59.16 PM.png>)
+![Alt text](<Screen Shot 2023-11-29 at 7.53.10 PM.png>)
