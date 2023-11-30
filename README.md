@@ -166,4 +166,6 @@ sequelize db:create
 
 ## Views
 ![Alt text](<Screen Shot 2023-11-29 at 7.59.16 PM.png>)
-![Alt text](<Screen Shot 2023-11-29 at 7.53.10 PM.png>)
+![Alt text](<Screen Shot 2023-11-29 at 7.53.10 PM-1.png>)>
+![Alt text](<Screen Shot 2023-11-29 at 10.32.14 PM.png>)
+![Alt text](<Screen Shot 2023-11-29 at 10.32.38 PM.png>)
